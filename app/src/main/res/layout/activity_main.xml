@@ -70,10 +70,10 @@
         android:contentDescription="TODO" />
 
     <ImageView
-        android:id="@+id/imageViewNorwegian"
+        android:id="@+id/imageViewRussian"
         android:layout_width="47dp"
         android:layout_height="33dp"
-
+        android:src="@drawable/russian_flag"
         android:onClick="onRussianFlagClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.415"

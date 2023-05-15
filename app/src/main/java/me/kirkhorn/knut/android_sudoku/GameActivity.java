@@ -3,6 +3,7 @@ package me.kirkhorn.knut.android_sudoku;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,6 +34,12 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     private int clickedCellId;
     private Board startBoard;
     private Board currentBoard;
+    private boolean isRunning;
+    private TextView textViewStopwatch;
+    private long startTime;
+    private Handler handler;
+    private Runnable stopwatchRunnable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,57 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
                 }
             }
         }
+        // Find the TextView
+        textViewStopwatch = findViewById(R.id.textViewStopwatch);
+
+        // Initialize the Handler
+        handler = new Handler();
+
+        // Start the stopwatch automatically
+        startStopwatch();
     }
+
+    private void startStopwatch() {
+        isRunning = true;
+        startTime = System.currentTimeMillis();
+
+        stopwatchRunnable = new Runnable() {
+            @Override
+            public void run() {
+                long currentTime = System.currentTimeMillis() - startTime;
+                int seconds = (int) (currentTime / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+                textViewStopwatch.setText(timeFormatted);
+
+                if (isRunning) {
+                    handler.postDelayed(this, 1000); // Update every second
+                }
+            }
+        };
+
+        handler.post(stopwatchRunnable);
+    }
+
+    private void stopStopwatch() {
+        isRunning = false;
+        handler.removeCallbacks(stopwatchRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startStopwatch();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopStopwatch();
+    }
+
+
 
     private ArrayList<Board> readGameBoards(int difficulty) {
         ArrayList<Board> boards = new ArrayList<>();

@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "There is no shared Preferences... Creating...");
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            if (locale.getLanguage().equals("ru") || locale.getLanguage().equals("nb") || locale.getLanguage().equals("nn")) {
+            if (locale.getLanguage().equals("no") || locale.getLanguage().equals("nb") || locale.getLanguage().equals("nn")) {
                 //Russian is selected
                 Log.i(TAG, "Russian is selected");
-                editor.putString("app_language", "ru");
+                editor.putString("app_language", "no");
                 editor.apply();
-                configuration.locale = new Locale("ru", "RU");
+                configuration.locale = new Locale("no", "NO");
                 currentEnglish = false;
             } else {
                 //English is selected
@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 currentEnglish = true;
             }
         } else {
-            if (currentLanguage.equals("ru")) {
+            if (currentLanguage.equals("no")) {
                 Log.i(TAG, "Russian is selected");
-                configuration.locale = new Locale("ru", "RU");
+                configuration.locale = new Locale("no", "NO");
                 currentEnglish = false;
 
             } else {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Resources resources = getBaseContext().getResources();
             Configuration configuration = new Configuration();
-            editor.putString("app_language", "ru");
+            editor.putString("app_language", "no");
             editor.apply();
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
