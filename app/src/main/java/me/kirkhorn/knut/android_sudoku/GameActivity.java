@@ -116,7 +116,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         handler.removeCallbacks(stopwatchRunnable);
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         startStopwatch();
@@ -126,7 +126,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
     protected void onPause() {
         super.onPause();
         stopStopwatch();
-    }
+    }*/
 
 
 
