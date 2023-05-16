@@ -240,6 +240,7 @@ public class GameActivity extends AppCompatActivity implements CellGroupFragment
         currentBoard.isBoardCorrect();
         if(checkAllGroups() && currentBoard.isBoardCorrect()) {
             Toast.makeText(this, getString(R.string.board_correct), Toast.LENGTH_SHORT).show();
+            stopStopwatch();
         } else {
             Toast.makeText(this, getString(R.string.board_incorrect), Toast.LENGTH_SHORT).show();
         }
